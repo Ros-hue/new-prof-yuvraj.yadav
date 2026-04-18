@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050816;
+  --background-elevated: rgba(10, 16, 32, 0.72);
+  --panel: rgba(9, 16, 29, 0.62);
+  --panel-strong: rgba(14, 22, 40, 0.84);
+  --foreground: #f5f7ff;
+  --muted: #8fa0c7;
+  --line: rgba(117, 151, 255, 0.18);
+  --glow: rgba(72, 169, 255, 0.5);
+  --accent: #59d0ff;
+  --accent-2: #7c5cff;
+  --accent-3: #26f0c1;
+  --shadow: 0 24px 80px rgba(5, 10, 28, 0.45);
+}
+
+html[data-theme="light"] {
+  --background: #0b1222;
+  --background-elevated: rgba(15, 23, 42, 0.68);
+  --panel: rgba(13, 20, 36, 0.68);
+  --panel-strong: rgba(18, 28, 50, 0.86);
+  --foreground: #f4f8ff;
+  --muted: #a4b4d4;
+  --line: rgba(148, 176, 255, 0.2);
+  --glow: rgba(66, 138, 255, 0.18);
+  --accent: #0b86ff;
+  --accent-2: #6147f8;
+  --accent-3: #02b99c;
+  --shadow: 0 24px 70px rgba(8, 14, 28, 0.34);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at top, rgba(92, 24, 255, 0.16), transparent 26%),
+    radial-gradient(circle at 20% 20%, rgba(89, 208, 255, 0.12), transparent 18%),
+    linear-gradient(180deg, #03050d 0%, var(--background) 35%, #030612 100%);
+  color: var(--foreground);
+  font-family: var(--font-body), sans-serif;
+  overflow-x: hidden;
+}
+
+html[data-theme="light"] body {
+  background:
+    radial-gradient(circle at top, rgba(92, 24, 255, 0.08), transparent 26%),
+    radial-gradient(circle at 20% 20%, rgba(89, 208, 255, 0.08), transparent 18%),
+    linear-gradient(180deg, #0e1527 0%, var(--background) 45%, #09111d 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(89, 208, 255, 0.22);
+}
+
+.grid-shell {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at center, black 30%, transparent 100%);
+  opacity: 0.35;
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  mix-blend-mode: soft-light;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.6) 0 1px, transparent 1px),
+    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.45) 0 1px, transparent 1px),
+    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.3) 0 1px, transparent 1px);
+  background-size: 140px 140px;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #dff7ff 0%, #7ed9ff 30%, #9d89ff 65%, #29ffc6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass-panel {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(22px);
+}
+
+.project-card-shell {
+  box-shadow:
+    0 22px 60px rgba(4, 10, 24, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.story-panel {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.section-anchor {
+  scroll-margin-top: 128px;
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 70;
+  background: radial-gradient(circle, var(--accent) 0%, rgba(89, 208, 255, 0.18) 70%);
+  box-shadow: 0 0 26px rgba(89, 208, 255, 0.6);
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 69;
+  border: 1px solid rgba(126, 217, 255, 0.35);
+}
+
+.click-ripple {
+  position: fixed;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(89, 208, 255, 0.5);
+  pointer-events: none;
+  z-index: 68;
+  animation: ripple 700ms ease-out forwards;
+}
+
+@keyframes ripple {
+  from {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(0.3);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(6);
+  }
+}
+
+@media (max-width: 767px) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
